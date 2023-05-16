@@ -22,7 +22,7 @@ def publish_images_at_intervals(api_key, channel_id, hours_interval, folder_name
 if __name__ == "__main__":
     load_dotenv()
     api_key = os.environ['TELEGRAM_API_KEY']
-    channel_id = '-1001968826354'
+    channel_id = os.environ['TELEGRAM_CHANNEL_ID']
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--hours_interval', help='Frequency of publication in hours', default=4, type=int)

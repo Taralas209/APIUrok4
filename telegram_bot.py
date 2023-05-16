@@ -20,7 +20,7 @@ def publish_image(api_key, channel_id, folder_name, image_name):
 if __name__ == "__main__":
     load_dotenv()
     api_key = os.environ['TELEGRAM_API_KEY']
-    channel_id = '-1001968826354'
+    channel_id = os.environ['TELEGRAM_CHANNEL_ID']
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--folder_name', help='Name of the folder containing images', default='images')
