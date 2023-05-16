@@ -12,8 +12,11 @@ def fetch_spacex_images(folder_path, launch_id):
         file_extension = get_file_extension(image_url)
         file_name = "spacex_{}{}".format(i, file_extension)
         file_path = folder_path / file_name
+        image_response = requests.get(image_url)
+        image_response.raise_for_status()
+
         with open(file_path, 'wb') as file:
-            file.write(requests.get(image_url).content)
+            file.write(image_response.content)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
