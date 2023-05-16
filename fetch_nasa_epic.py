@@ -14,11 +14,11 @@ def fetch_nasa_epic(folder_path, nasa_token):
     response = requests.get(epic_url, params=urlencode(payload))
     response.raise_for_status()
 
-    for i, image_data in enumerate(response.json()):
-        image_date = image_data['date']
+    for i, image_info in enumerate(response.json()):
+        image_date = image_info['date']
         splitted_date = image_date.split()
         year, mounth, day = (splitted_date[0].split('-'))
-        image_name = image_data['image']
+        image_name = image_info['image']
 
         epic_archive_url = f"https://api.nasa.gov/EPIC/archive/natural/{year}/{mounth}/{day}/png/{image_name}.png"
         payload = {
