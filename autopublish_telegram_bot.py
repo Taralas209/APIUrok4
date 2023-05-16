@@ -6,13 +6,13 @@ import argparse
 from dotenv import load_dotenv
 
 def publish_images_at_intervals(api_key, channel_id, hours_interval, folder_name):
+    bot = telegram.Bot(token=api_key)
     while True:
         folder_path, folder_names, file_names = next(os.walk(folder_name))
         random.shuffle(file_names)
 
         for image_to_publish in file_names:
             full_path_to_image = os.path.join(folder_name, image_to_publish)
-            bot = telegram.Bot(token=api_key)
             with open(full_path_to_image, 'rb') as image_file:
                 bot.send_document(chat_id=channel_id, document=image_file)
 
