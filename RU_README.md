@@ -9,7 +9,8 @@
 3. Склонируйте репозиторий и создайте файл `.env` в корневой директории проекта со следующим содержимым:
 
 `NASA_API_KEY=your_nasa_api_key`\
-`TELEGRAM_API_KEY=your_telegram_api_key`
+`TELEGRAM_API_KEY=your_telegram_api_key`\
+`TELEGRAM_CHANNEL_ID`
 
 
 4. Python3 должен быть установлен на вашем компьютере. Затем используйте `pip` (или `pip3`, если есть конфликт с Python2) для установки зависимостей:
@@ -68,7 +69,7 @@
 
 #### Функции
 
-- `fetch_spacex_images(folder_path, launch_id=None)`: Основная функция скрипта, принимающая следующие параметры:
+- `fetch_spacex_images(folder_path, launch_id)`: Основная функция скрипта, принимающая следующие параметры:
   - `folder_path`: Объект Path, где будут сохранены скачанные изображения.
   - `launch_id`: (необязательный) Идентификатор запуска SpaceX, для которого необходимо загрузить изображения. Если не указан, будут загружены изображения последнего запуска.
 
@@ -106,7 +107,7 @@
 Кроме того, для создания папки для сохранения загруженных изображений он использует функцию `create_folder` из скрипта `common_scripts.py`.
 
 
-### 5. Скрипт `publish_image.py`
+### 5. Скрипт `telegram_bot.py`
 
 Этот скрипт публикует одно изображение в указанном канале Telegram. Изображение может быть выбрано случайным образом из папки или указано по имени.
 
@@ -122,7 +123,7 @@
 
 Скрипт можно запустить из консоли с помощью следующей команды:
 
-`python publish_image.py [--folder_name FOLDER_NAME] [--image_name IMAGE_NAME]`
+`python telegram-bot.py [--folder_name FOLDER_NAME] [--image_name IMAGE_NAME]`
 
 #### Аргументы
 
@@ -130,7 +131,7 @@
 - `--image_name IMAGE_NAME`: (необязательный) Имя изображения для публикации. Если не указано, будет опубликовано случайное изображение из папки.
 
 
-### 6. Скрипт `publish_images_at_intervals.py`
+### 6. Скрипт `autopublish_telegram_bot.py`
 
 Этот скрипт публикует изображения в указанном канале Telegram с определенными интервалами. Изображения выбираются случайным образом из папки и публикуются с указанной частотой.
 
@@ -146,7 +147,7 @@
 
 Скрипт можно запустить из консоли с помощью следующей команды:
 
-`python publish_images_at_intervals.py [--hours_interval HOURS_INTERVAL] [--folder_name FOLDER_NAME]`
+`python autopublish_telegram_bot.py [--hours_interval HOURS_INTERVAL] [--folder_name FOLDER_NAME]`
 
 #### Аргументы
 

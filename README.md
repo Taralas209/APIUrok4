@@ -9,10 +9,11 @@ This project contains several scripts to download images from NASA's Astronomy P
 3. Clone the repository and create a `.env` file in the project root directory with the following contents:
 
 `NASA_API_KEY=your_nasa_api_key`\
-`TELEGRAM_API_KEY=your_telegram_api_key`
+`TELEGRAM_API_KEY=your_telegram_api_key`\
+`TELEGRAM_CHANNEL_ID`
 
 
-4. Python3 should be already installed. Then use `pip` (or `pip3`, if there is a conflict with Python2) to install dependencies:
+4. Python3 should be already installed. Then use `pip` (or `pip3`) to install dependencies:
 
 `pip install -r requirements.txt`
 
@@ -68,7 +69,7 @@ This script downloads images related to SpaceX's latest or specified launch and 
 
 #### Functions
 
-- `fetch_spacex_images(folder_path, launch_id=None)`: The main function of the script that takes the following parameters:
+- `fetch_spacex_images(folder_path, launch_id)`: The main function of the script that takes the following parameters:
   - `folder_path`: The Path object where the downloaded images will be saved.
   - `launch_id`: (Optional) The ID of the SpaceX launch for which images should be downloaded. If not specified, images from the latest launch will be downloaded.
 
@@ -106,7 +107,7 @@ This script imports and uses the functions from the individual scripts as follow
 Additionally, it uses the `create_folder` function from `common_scripts.py` to create a folder for storing the downloaded images.
 
 
-### 5. Script `publish_image.py`
+### 5. Script `telegram_bot.py`
 
 This script publishes a single image to a specified Telegram channel. The image can be selected randomly from a folder or specified by its name.
 
@@ -122,7 +123,7 @@ This script publishes a single image to a specified Telegram channel. The image 
 
 You can run the script from the console using the following command:
 
-`python publish_image.py [--folder_name FOLDER_NAME] [--image_name IMAGE_NAME]`
+`python telegram_bot.py [--folder_name FOLDER_NAME] [--image_name IMAGE_NAME]`
 
 
 #### Arguments
@@ -132,7 +133,7 @@ You can run the script from the console using the following command:
 
 
 
-### 6. Script `publish_images_at_intervals.py`
+### 6. Script `autopublish_telegram_bot.py`
 
 This script publishes images to a specified Telegram channel at regular intervals. Images are selected randomly from a folder and published at the specified frequency.
 
@@ -148,7 +149,7 @@ This script publishes images to a specified Telegram channel at regular interval
 
 You can run the script from the console using the following command:
 
-`python publish_images_at_intervals.py [--hours_interval HOURS_INTERVAL] [--folder_name FOLDER_NAME]`
+`python autopublish_telegram_bot.py [--hours_interval HOURS_INTERVAL] [--folder_name FOLDER_NAME]`
 
 #### Arguments
 - `--hours_interval HOURS_INTERVAL`: (Optional) The frequency of publication in hours. If not specified, the default value is 4 hours.
