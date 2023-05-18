@@ -14,7 +14,7 @@ def fetch_nasa_epic(folder_path, nasa_token):
     response = requests.get(epic_url, params=urlencode(payload))
     response.raise_for_status()
 
-    for i, image_info in enumerate(response.json()):
+    for index, image_info in enumerate(response.json()):
         image_date = image_info['date']
         splitted_date = image_date.split()
         year, mounth, day = (splitted_date[0].split('-'))
@@ -27,7 +27,7 @@ def fetch_nasa_epic(folder_path, nasa_token):
         archive_response = requests.get(epic_archive_url, params=urlencode(payload))
         archive_response.raise_for_status()
 
-        file_name = "nasa_epic_{}_{}.png".format(splitted_date[0], i)
+        file_name = "nasa_epic_{}_{}.png".format(splitted_date[0], index)
         file_path = folder_path / file_name
         with open(file_path, 'wb') as file:
             file.write(archive_response.content)
