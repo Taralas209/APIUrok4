@@ -14,7 +14,7 @@ if __name__ == "__main__":
     folder_path = create_folder(folder_name)
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--launch_id', help='ID of the SpaceX launch.')
+    parser.add_argument('--launch_id', help='ID of the SpaceX launch.', default="latest")
     parser.add_argument('--count', help='How many pictures to download', default=5, type=int)
     args = parser.parse_args()
 
