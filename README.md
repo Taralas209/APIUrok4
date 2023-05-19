@@ -161,19 +161,23 @@ You can run the script from the console using the following command:
 This script contains utility functions that are shared among multiple other scripts. It is not meant to be run directly but is imported and used by the other scripts.
 
 #### Functions
-- `create_folder(folder_name)`: Creates a folder with the given name if it doesn't already exist. Returns a Path object representing the folder's path.
-    - `folder_name`: The name of the folder to create.
+- `download_and_save_file(url, file_path, params=None)`: Sends a GET request to the provided URL (with optional parameters), checks the response status, and if it's successful, downloads the content and saves it to a file at the given path. If the response status indicates an error, it raises an HTTPError.
+    - `url`: The URL for the GET request.
+    - `file_path`: The path where the content from the response will be saved.
+    - `params`: A dictionary of parameters to be added to the GET request (optional).
+
+
 - `get_file_extension(image_url)`: Extracts and returns the file extension from a given image URL.
   - `image_url`: The URL of the image.
 
 ### How to use
-  The functions in this script can be imported into other scripts and used as needed. For example, to import and use the `create_folder` function, you can include the following line at the beginning of another script:
+  The functions in this script can be imported into other scripts and used as needed. For example, to import and use the `download_and_save_image` function, you can include the following line at the beginning of another script:
   
-`from common_scripts import create_folder`
+`from common_scripts import download_and_save_image`
 
 Then, you can use the create_folder function in your script like this:
 
-`folder_path = create_folder("images")`
+`download_and_save_file(url, file_path, params=None)`
 
 Since `common_scripts.py` is a collection of utility functions, there are no command line arguments or specific instructions for running it directly.
 
