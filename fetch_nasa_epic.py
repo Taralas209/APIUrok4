@@ -1,8 +1,9 @@
 import os
 import requests
+from pathlib import Path
 from dotenv import load_dotenv
 from urllib.parse import urlencode
-from common_scripts import create_folder, download_and_save_image
+from common_scripts import download_and_save_image
 
 
 def fetch_nasa_epic(folder_path, nasa_token):
@@ -31,5 +32,6 @@ if __name__ == "__main__":
     nasa_token = os.environ['NASA_API_KEY']
 
     folder_name = "images"
-    folder_path = create_folder(folder_name)
+    folder_path = Path(folder_name)
+    folder_path.mkdir(parents=True, exist_ok=True)
     fetch_nasa_epic(folder_path, nasa_token)

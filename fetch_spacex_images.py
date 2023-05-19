@@ -1,6 +1,7 @@
 import argparse
 import requests
-from common_scripts import get_file_extension, create_folder, download_and_save_image
+from pathlib import Path
+from common_scripts import get_file_extension, download_and_save_image
 
 def fetch_spacex_images(folder_path, launch_id):
     spacex_url = 'https://api.spacexdata.com/v5/launches/{}'.format(launch_id)
@@ -22,7 +23,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     folder_name = "images"
-    folder_path = create_folder(folder_name)
+    folder_path = Path(folder_name)
+    folder_path.mkdir(parents=True, exist_ok=True)
     fetch_spacex_images(folder_path, args.launch_id)
 
 

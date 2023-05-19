@@ -1,9 +1,10 @@
 import os
 import argparse
 import requests
+from pathlib import Path
 from dotenv import load_dotenv
 from urllib.parse import urlencode
-from common_scripts import get_file_extension, create_folder, download_and_save_image
+from common_scripts import get_file_extension, download_and_save_image
 
 
 def fetch_nasa_apod(folder_path, nasa_token, count=5):
@@ -32,5 +33,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     folder_name = "images"
-    folder_path = create_folder(folder_name)
+    folder_path = Path(folder_name)
+    folder_path.mkdir(parents=True, exist_ok=True)
     fetch_nasa_apod(folder_path, nasa_token, args.count)

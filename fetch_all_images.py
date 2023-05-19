@@ -1,17 +1,19 @@
 import os
 import argparse
+from pathlib import Path
 from dotenv import load_dotenv
 from fetch_spacex_images import fetch_spacex_images
 from fetch_nasa_apod import fetch_nasa_apod
 from fetch_nasa_epic import fetch_nasa_epic
-from common_scripts import create_folder
+
 
 if __name__ == "__main__":
     load_dotenv()
     nasa_token = os.environ['NASA_API_KEY']
 
     folder_name = "images"
-    folder_path = create_folder(folder_name)
+    folder_path = Path(folder_name)
+    folder_path.mkdir(parents=True, exist_ok=True)
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--launch_id', help='ID of the SpaceX launch.', default="latest")
