@@ -2,7 +2,7 @@ import os
 import requests
 from dotenv import load_dotenv
 from urllib.parse import urlencode
-from common_scripts import create_folder
+from common_scripts import create_folder, download_and_save_image
 
 
 def fetch_nasa_epic(folder_path, nasa_token):
@@ -21,16 +21,10 @@ def fetch_nasa_epic(folder_path, nasa_token):
         image_name = image_info['image']
 
         epic_archive_url = f"https://api.nasa.gov/EPIC/archive/natural/{year}/{mounth}/{day}/png/{image_name}.png"
-        payload = {
-            'api_key': nasa_token,
-        }
-        archive_response = requests.get(epic_archive_url, params=urlencode(payload))
-        archive_response.raise_for_status()
-
         file_name = "nasa_epic_{}_{}.png".format(splitted_date[0], index)
         file_path = folder_path / file_name
-        with open(file_path, 'wb') as file:
-            file.write(archive_response.content)
+
+        download_and_save_image(epic_archive_url, file_path, params=payload)
 
 if __name__ == "__main__":
     load_dotenv()

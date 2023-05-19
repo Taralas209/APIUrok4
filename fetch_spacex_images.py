@@ -1,6 +1,6 @@
 import argparse
 import requests
-from common_scripts import get_file_extension, create_folder
+from common_scripts import get_file_extension, create_folder, download_and_save_image
 
 def fetch_spacex_images(folder_path, launch_id):
     spacex_url = 'https://api.spacexdata.com/v5/launches/{}'.format(launch_id)
@@ -12,11 +12,9 @@ def fetch_spacex_images(folder_path, launch_id):
         file_extension = get_file_extension(image_url)
         file_name = "spacex_{}{}".format(index, file_extension)
         file_path = folder_path / file_name
-        image_response = requests.get(image_url)
-        image_response.raise_for_status()
 
-        with open(file_path, 'wb') as file:
-            file.write(image_response.content)
+        download_and_save_image(image_url, file_path)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

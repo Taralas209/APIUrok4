@@ -3,7 +3,7 @@ import argparse
 import requests
 from dotenv import load_dotenv
 from urllib.parse import urlencode
-from common_scripts import get_file_extension, create_folder
+from common_scripts import get_file_extension, create_folder, download_and_save_image
 
 
 def fetch_nasa_apod(folder_path, nasa_token, count=5):
@@ -20,11 +20,8 @@ def fetch_nasa_apod(folder_path, nasa_token, count=5):
         file_extension = get_file_extension(image_url)
         file_name = "nasa_{}{}".format(index, file_extension)
         file_path = folder_path / file_name
-        image_response = requests.get(image_url)
-        image_response.raise_for_status()
 
-        with open(file_path, 'wb') as file:
-            file.write(image_response.content)
+        download_and_save_image(image_url, file_path)
 
 if __name__ == "__main__":
     load_dotenv()
